@@ -1,19 +1,19 @@
 import numpy as np
 
-def ceil(x):
-    return np.ceil(x)
+def ceil(*args, **kwargs):
+    return np.ceil(*args, **kwargs)
 
-def floor(x):
-    return np.floor(x)
+def floor(*args, **kwargs):
+    return np.floor(*args, **kwargs)
 
-def atan2(x):
-    return np.arctan2(x)
+def atan2(*args, **kwargs):
+    return np.arctan2(*args, **kwargs)
 
-def round(x):
-    return np.round(x)
+def round(*args, **kwargs):
+    return np.round(*args, **kwargs)
 
-def acos(x):
-    return np.arccos(x)
+def acos(*args, **kwargs):
+    return np.arccos(*args, **kwargs)
 
 def normalize(x, axis=0):
     n = np.math.norm(x, axis=axis, keepdims=True)

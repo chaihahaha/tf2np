@@ -1,6 +1,10 @@
 import numpy as np
 from numpy import *
 
+import tf2np.math
+import tf2np.raw_ops
+import tf2np.linalg
+
 def rank(x):
     return len(x.shape)
 
@@ -33,13 +37,18 @@ def tensor_scatter_nd_update(tensor, indices, updates):
     return t
 
 def gather(params, indices, axis=0, batch_dims=None):
+    params = np.array(params)
+    indices = np.array(indices)
     isp = list(indices.shape)
     psp = list(params.shape)
     ibsp = list(isp[batch_dims:])
     pbsp = list(psp[batch_dims:])
     resultsp = psp[:axis] + ibsp + psp[axis+1:]
-    baxis = axis - batch_dims
-    n_batches = np.prod(psp[:axis], int)
+    if batch_dims:
+        baxis = axis - batch_dims
+    else:
+        baxis = axis
+    n_batches = np.prod(psp[:axis], dtype=int)
     pbs = params.reshape([n_batches] + pbsp)
     ibs = indices.reshape([n_batches] + ibsp)
     res = []
@@ -67,20 +76,20 @@ def reduce_prod(*args, **kwargs):
 def reduce_max(*args, **kwargs):
     return np.max(*args, **kwargs)
 
-def concat(x):
-    return np.concatenate(x)
+def concat(*args, **kwargs):
+    return np.concatenate(*args, **kwargs)
 
-def maximum(x):
-    return np.max(x)
+def maximum(*args, **kwargs):
+    return np.max(*args, **kwargs)
 
-def Variable(x):
-    return np.array(x)
+def Variable(*args, **kwargs):
+    return np.array(*args, **kwargs)
 
-def range(x):
-    return np.arange(x)
+def range(*args, **kwargs):
+    return np.arange(*args, **kwargs)
 
-def constant(x, dtype=np.float32):
-    return np.array(x, dtype=dtype)
+def constant(*args, **kwargs):
+    return np.array(*args, **kwargs)
 
 def clip_by_value(t, clip_value_min, clip_value_max):
     return np.clip(t, clip_value_min, clip_value_max)
