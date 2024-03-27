@@ -15,9 +15,5 @@ def round(*args, **kwargs):
 def acos(*args, **kwargs):
     return np.arccos(*args, **kwargs)
 
-def normalize(x, axis=0):
-    n = np.math.norm(x, axis=axis, keepdims=True)
-    return np.nan_to_num(x/n), n
-
 def divide_no_nan(x,y):
     return np.nan_to_num(x/y)
