@@ -1,9 +1,9 @@
 import numpy as np
 from numpy import *
 
-import tf2np.math
-import tf2np.raw_ops
-import tf2np.linalg
+from . import math
+from . import raw_ops
+from . import linalg
 
 def rank(x):
     return len(x.shape)
